@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Сердце на перекрёстке</title>
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- СТАРТОВЫЙ ЭКРАН -->
+    <div id="start-screen">
+        <!-- Заголовок -->
+        <h1 id="title" data-ru="Сердце<br>на перекрёстке" data-en="Heart<br>at the Crossroads">
+            <span>Сердце</span>
+            <span>на перекрёстке</span>
+        </h1>
+        
+        <!-- Меню РОМБОМ (как на скрине) -->
+        <div class="start-buttons">
+            <!-- Верх -->
+            <button id="start-game" data-ru="Начать игру" data-en="Start Game">Начать игру</button>
+            <!-- Право -->
+            <button id="continue-game" data-ru="Продолжить" data-en="Continue">Продолжить</button>
+            <!-- Низ -->
+            <button id="show-password" data-ru="Ввести пароль" data-en="Enter Password">Ввести пароль</button>
+            <!-- Лево -->
+            <button id="gallery-btn" data-ru="Галерея" data-en="Gallery">Галерея</button>
+        </div>
+
+        <!-- Форма пароля (скрыта по умолчанию) -->
+        <div id="password-form">
+            <input type="text" id="password-input" placeholder="Пароль">
+            <div class="pwd-buttons">
+                <button id="password-submit" data-ru="Войти" data-en="Login">Войти</button>
+                <button id="back-button" data-ru="Назад" data-en="Back">Назад</button>
+            </div>
+        </div>
+        
+        <!-- Кнопка языка (справа сверху) -->
+        <button id="language-btn">
+            <span id="language-icon">🇷🇺</span>
+        </button>
+    </div>
+
+    <!-- ГАЛЕРЕЯ -->
+    <div id="gallery-container" style="display: none;"></div>
+
+    <!-- ИГРОВОЙ ЭКРАН -->
+    <div id="game-container" style="display: none;">
+        <!-- Фон (параллакс) -->
+        <div class="parallax-bg" id="background"></div>
+        
+        <!-- Персонажи -->
+        <div class="character-left" id="character-left"></div>
+        <div class="character-right" id="character-right"></div>
+        
+        <!-- Эффекты (частицы, оверлей телефона) -->
+        <div id="particles"></div>
+        <div id="overlay-layer"></div>
+
+        <!-- Диалоговое окно -->
+        <div class="dialogue-box" id="dialogue-box">
+            <p id="speaker-name"></p>
+            <p id="dialogue-text"></p>
+            <!-- Кнопки выбора добавляются сюда через JS -->
+        </div>
+
+        <!-- Верхнее меню (алмазы, кнопка меню) -->
+        <div id="menu">
+            <div id="diamonds">
+                <img src="./assets/ui/diamonds.png" alt="💎">
+                <span id="diamonds-count">0</span>
+            </div>
+            <button id="menu-btn" data-ru="Меню" data-en="Menu">Меню</button>
+            <button id="stats-btn">Статы</button>
+        </div>
+
+        <!-- Полоска прогресса -->
+        <div id="progress-bar"><div id="progress"></div></div>
+    </div>
+
+    <!-- Уведомления и ошибки -->
+    <div id="notification-area"></div>
+
+    <!-- СКРИПТЫ -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    
+    <!-- Твои файлы (порядок важен) -->
+    <script src="data.js"></script>
+    <script src="engine.js"></script>
+</body>
+</html>

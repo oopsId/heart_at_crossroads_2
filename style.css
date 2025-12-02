@@ -1,0 +1,251 @@
+/* --- ШРИФТЫ (пути относительные) --- */
+@font-face {
+    font-family: 'LobsterTwo';
+    src: url('./assets/fonts/LobsterTwo-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'GreatVibes';
+    src: url('./assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'GoodVibesCyr';
+    src: url('./assets/fonts/GoodVibesCyr.ttf') format('truetype');
+}
+
+/* --- ОСНОВНЫЕ СТИЛИ --- */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #000;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    overflow: hidden;
+}
+
+/* Контейнеры на весь экран */
+#game-container, #start-screen, #gallery-container {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden;
+}
+
+/* --- СТАРТОВЫЙ ЭКРАН --- */
+#start-screen {
+    background: url('./assets/backgrounds/start_screen.png') no-repeat center center fixed;
+    background-size: cover;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-screen h1 {
+    color: #A67C52;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px; /* Отступ до кнопок */
+    text-align: center;
+    line-height: 1.2;
+}
+#start-screen h1.ru { font-family: 'GoodVibesCyr', sans-serif; }
+#start-screen h1.en { font-family: 'GreatVibes', sans-serif; }
+#start-screen h1 span:first-child { font-size: 52px; display: block; }
+#start-screen h1 span:last-child { font-size: 44px; display: block; }
+
+/* --- МЕНЮ РОМБОМ (Твой дизайн) --- */
+.start-buttons {
+    position: relative;
+    width: 320px;  /* Ширина всей конструкции */
+    height: 320px; /* Высота всей конструкции */
+    margin-top: 10px;
+}
+
+/* Общий стиль круглой кнопки */
+.start-buttons button, #gallery-btn {
+    position: absolute; /* Важно для расстановки */
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(245, 240, 225, 0.7);
+    color: #5D4037;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    line-height: 1.2;
+}
+
+.start-buttons button:hover {
+    transform: scale(1.1) !important; /* important перебивает позицию */
+    background: rgba(245, 240, 225, 0.95);
+    z-index: 10;
+}
+
+/* Позиции кнопок (Крест/Ромб) */
+/* Верх - Начать */
+#start-game {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#start-game:hover { transform: translateX(-50%) scale(1.1); }
+
+/* Низ - Пароль */
+#show-password {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#show-password:hover { transform: translateX(-50%) scale(1.1); }
+
+/* Лево - Галерея */
+#gallery-btn {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+#gallery-btn:hover { transform: translateY(-50%) scale(1.1); }
+
+/* Право - Продолжить */
+#continue-game {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+#continue-game:hover { transform: translateY(-50%) scale(1.1); }
+
+
+/* --- ФОРМА ПАРОЛЯ --- */
+#password-form {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+}
+#password-input {
+    padding: 12px; font-size: 16px; border-radius: 20px;
+    border: 1px solid rgba(93, 64, 55, 0.3); background: rgba(245, 240, 225, 0.9);
+    text-align: center; width: 200px;
+}
+.pwd-buttons { display: flex; gap: 10px; }
+#password-submit, #back-button {
+    width: 100px; height: 50px; border-radius: 25px;
+    background: rgba(245, 240, 225, 0.9); border: none; font-weight: bold;
+    color: #5D4037; cursor: pointer;
+}
+
+/* Кнопка языка */
+#language-btn {
+    position: absolute; top: 20px; right: 20px;
+    width: 40px; height: 40px;
+    background: transparent; border: 1px solid #fff; border-radius: 50%;
+    color: white; cursor: pointer; z-index: 3001; font-size: 20px;
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* --- ИГРОВОЙ ПРОЦЕСС --- */
+
+/* Фон и анимация */
+.parallax-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center;
+    transition: opacity 1s ease;
+    animation: slideBackground 60s linear infinite;
+}
+@keyframes slideBackground {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+/* Персонажи */
+.character-left, .character-right {
+    position: absolute; bottom: 0; width: 70%; height: 100vh;
+    background-position: bottom center; background-size: contain; background-repeat: no-repeat;
+    z-index: 2; transition: opacity 1s ease, transform 0.3s ease, filter 0.3s ease;
+    pointer-events: none;
+}
+.character-left { left: -15%; }
+.character-right { right: -15%; }
+
+.character-speaker { transform: scale(1.1); filter: brightness(1.1); z-index: 3; }
+.character-non-speaker { transform: scale(1); filter: brightness(0.8); z-index: 2; }
+
+/* Анимации персонажей */
+@keyframes shiver {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+.shiver { animation: shiver 0.5s infinite; }
+.heartbeat { animation: heartbeat 1s 3; }
+
+/* Диалог */
+.dialogue-box {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    min-height: 25vh; max-height: 50vh;
+    background: linear-gradient(to top, rgba(93, 64, 55, 0.95), rgba(93, 64, 55, 0.8));
+    color: #F5F0E1; padding: 15px 20px 30px;
+    z-index: 100; display: flex; flex-direction: column;
+    border-top: 2px solid #A67C52; overflow-y: auto;
+}
+#speaker-name { font-size: 18px; font-weight: bold; color: #E6D5C0; margin: 0 0 5px; text-shadow: 1px 1px 2px black;}
+#dialogue-text { font-size: 16px; line-height: 1.4; margin: 0; text-shadow: 1px 1px 1px black; }
+
+/* Кнопки выбора */
+.choice-btn {
+    display: block; width: 90%; margin: 10px auto; padding: 12px;
+    background: linear-gradient(to bottom, #F5F0E1, #E6D5C0);
+    color: #5D4037; border: 1px solid rgba(93, 64, 55, 0.2);
+    border-radius: 8px; cursor: pointer; text-align: center;
+    font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.choice-btn:active { transform: scale(0.98); }
+.choice-btn:disabled { opacity: 0.6; background: #666; cursor: not-allowed; }
+
+/* --- ГАЛЕРЕЯ (GSAP 3D) --- */
+#gallery-container {
+    background: url('./assets/backgrounds/shoebox_texture.png') center/cover;
+    z-index: 4000; padding: 20px; display: flex; flex-direction: column; align-items: center;
+}
+.gallery-header { 
+    color: #F5E6C9; font-size: 2.5rem; margin-top: 20px; text-shadow: 2px 2px 4px black; 
+    font-family: 'LobsterTwo', cursive;
+}
+.cards-container {
+    position: relative; height: 600px; width: 100%; max-width: 500px;
+    perspective: 1000px; display: flex; justify-content: center; align-items: center;
+    margin-top: 20px;
+}
+.premium-card {
+    position: absolute; width: 260px; height: 380px;
+    background: linear-gradient(to bottom, #FFF5E1, #F5D7A8);
+    border: 2px solid #fff; border-radius: 10px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    overflow: hidden;
+}
+.premium-card.locked { background: linear-gradient(to bottom, #444, #222); border-color: #666; }
+
+.card-name {
+    width: 100%; background: rgba(0,0,0,0.6); color: #fff;
+    padding: 10px 0; text-align: center; font-size: 14px;
+}
+.card-unlock-button {
+    margin-bottom: 15px; p
